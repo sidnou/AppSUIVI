@@ -1,4 +1,5 @@
 import sqlite3
+from sqlite3 import IntegrityError
 
 
 def creation_db():
@@ -21,11 +22,10 @@ class DataBase:
     def __init__(self):
         self.connex = sqlite3.connect('suivi-Chronopost.db')
         self.cur = self.connex.cursor()
-
+    # verification de la donnée
     def check_data(self, suivi):
         db_check = [suivi]
         self.res = self.cur.execute("""SELECT COUNT(*) FROM suivi_chronopost WHERE numero_suivi = ?""", db_check)
-        print(self.res.fetchone())
         self.t_res = self.res.fetchone()[0]
         if self.t_res > 0:
             print("Le numèro de suivi existe déjà")
@@ -37,9 +37,11 @@ class DataBase:
     # Ajout de donnée
     def add_data(self, numero_suivi, numero_dossier):
         db_suivi = [numero_dossier, numero_suivi]
-
-        self.cur.execute("INSERT INTO suivi_chronopost (numero_dossier,numero_suivi) VALUES (?,?)", db_suivi)
-        self.connex.commit()
+        try:
+            self.cur.execute("INSERT INTO suivi_chronopost (numero_dossier,numero_suivi) VALUES (?,?)", db_suivi)
+            self.connex.commit()
+        except IntegrityError:
+            print("le Numèro de suivi existe déjà ")
         # self.connex.close()
 
     # suppression de donnée
@@ -50,6 +52,6 @@ class DataBase:
 if __name__ == '__main__':
     creation_db()
     db = DataBase()
-    db.check_data(822445246)
-    db.add_data(822445246, "M67S-9999-99999")
+    db.check_data(1822445246)
+    db.add_data(2822445246, "M67S-9999-99999")
     db.connex.close()
