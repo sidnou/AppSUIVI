@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter.font as font
 
 #####################################################################
 # ## Exemple
@@ -177,10 +178,11 @@ def impression():
 
 
 # Bouton de vérification des doublons
-bouton1 = Button(fenetre, text='Vérification', command=verif_doublon, bg="#12D292")
+monFont = font.Font(family='Couriel',size=18,weight="bold")
+bouton1 = Button(fenetre, text='Vérification', command=verif_doublon, bg="#12D292",fg="white", font=monFont)
 bouton1.pack(fill="x")
 # Bouton d'Impression 
-bouton2 = Button(fenetre, text='Impression', command=impression, bg='#DFA80B', fg="white", font=("Courriel"))
+bouton2 = Button(fenetre, text='Impression', command=impression, bg='#DFA80B', fg="white", font=monFont)
 bouton2.pack(fill='x')
 
 fenetre.mainloop()
