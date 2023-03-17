@@ -34,10 +34,11 @@ fenetre.title("Suivi Envoi Chronopost")  # Titre de la fenêtre
 fenetre.geometry("800x600")  # Dimension de la fenêtre
 # fenetre.iconbitmap() # Icone de l'application 
 fenetre.minsize(800, 600)
+fenetre.maxsize(800,600)
 fenetre.config(background="#0072B5")
 # Version de l'application 
-labelVersion = Label(fenetre,text=VERSION)
-labelVersion.pack(side=RIGHT)
+labelVersion = Label(fenetre,text=VERSION,background="#0072B5")
+labelVersion.place(x=760,y=0)
 # Cadre 
 cadre = Frame(fenetre, width=100, height=700, bg="red", relief="solid", bd=1)
 cadre.pack(expand=YES)
