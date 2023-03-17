@@ -1,3 +1,6 @@
 /venv
 suivi-Chronopost.db
 .idea
+.vscode
+.vscode/settings.json
+__pycache__
