@@ -4,3 +4,4 @@ suivi-Chronopost.db
 .vscode
 .vscode/settings.json
 __pycache__
+*.pdf
