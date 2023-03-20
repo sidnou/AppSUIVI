@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter.font as font
+from gen_pdf import *
 VERSION = "0.0.1b"
 #####################################################################
 # ## Exemple
@@ -162,6 +163,7 @@ def verif_doublon():
         # print(nSuivi[n].get())
         if nSuivi[n].get() != "":
             entreeSaisi.append(nSuivi[n].get())
+            print(entreeSaisi)
     # print(entreeSaisi)    
     for el in entreeSaisi:
         if entreeSaisi.count(el)>1:
@@ -180,7 +182,32 @@ def verif_doublon():
            
 # Impression de la feuille de suivi Chronopost
 def impression():
-    pass
+    data = [
+        ['Numéro de Suivi Chronopost','Numéro de Suivi Chronopost'],
+        [nSuivi[0].get(),nSuivi[20].get()],
+        [nSuivi[1].get(),nSuivi[21].get()],
+        [nSuivi[2].get(),nSuivi[22].get()],
+        [nSuivi[3].get(),nSuivi[23].get()],
+        [nSuivi[4].get(),nSuivi[24].get()],
+        [nSuivi[5].get(),nSuivi[25].get()],
+        [nSuivi[6].get(),nSuivi[26].get()],
+        [nSuivi[7].get(),nSuivi[27].get()],
+        [nSuivi[8].get(),nSuivi[28].get()],
+        [nSuivi[9].get(),nSuivi[29].get()],
+        [nSuivi[10].get(),nSuivi[30].get()],
+        [nSuivi[11].get(),nSuivi[31].get()],
+        [nSuivi[12].get(),nSuivi[32].get()],
+        [nSuivi[13].get(),nSuivi[33].get()],
+        [nSuivi[14].get(),nSuivi[34].get()],
+        [nSuivi[15].get(),nSuivi[35].get()],
+        [nSuivi[16].get(),nSuivi[36].get()],
+        [nSuivi[17].get(),nSuivi[37].get()],
+        [nSuivi[18].get(),nSuivi[38].get()],
+        [nSuivi[19].get(),nSuivi[39].get()]
+        ]
+    print(data)
+    pdf = GenPdf(data,"Depart_Colis_Chronopost.pdf","Suivi Colis Chronopost")
+    pdf.generateur_pdf()
 
 def effacerValeur():
     for n in range(NOMBRE_SAISI):

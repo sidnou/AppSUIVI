@@ -37,11 +37,15 @@ data = []
 for i in range(10):
     data.append(['Ligne %s, Colonne 1' % i, 'Ligne %s, Colonne 2' % i, 'Ligne %s, Colonne 3' % i])
     print(data)
+
+data1 = [["", "Date: 20/03/2023"],["","Nom et Prénom"],["","Signature:"]]
 # Création du document PDF
 pdf = SimpleDocTemplate("exemple.pdf", pagesize=letter)
 
 # Création du tableau avec les données
 table = Table(data, colWidths=[60*mm, 60*mm, 60*mm])
+table1 = Table(data1,colWidths=[90*mm,90*mm])
+
 
 # Configuration du style du tableau
 style = TableStyle([
@@ -59,4 +63,4 @@ style = TableStyle([
 table.setStyle(style)
 
 # Ajouter le tableau au document PDF
-pdf.multiBuild([table])
+pdf.multiBuild([table,table1])
