@@ -29,8 +29,9 @@
 #         c.save()
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
+from  reportlab.lib.styles import ParagraphStyle as PS
 from reportlab.lib.units import mm
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle,Paragraph
 
 # Données pour remplir le tableau
 data = []
@@ -38,13 +39,12 @@ for i in range(10):
     data.append(['Ligne %s, Colonne 1' % i, 'Ligne %s, Colonne 2' % i, 'Ligne %s, Colonne 3' % i])
     print(data)
 
-data1 = [["", "Date: 20/03/2023"],["","Nom et Prénom"],["","Signature:"]]
-# Création du document PDF
+data1 = [["", "Date: 20/03/2023\nNom et Prénom:\nSignature:\n\n\n"]]
 pdf = SimpleDocTemplate("exemple.pdf", pagesize=letter)
 
 # Création du tableau avec les données
 table = Table(data, colWidths=[60*mm, 60*mm, 60*mm])
-table1 = Table(data1,colWidths=[90*mm,90*mm])
+table1 = Table(data1,colWidths=[90*mm,90*mm],spaceBefore=(15*mm),rowHeights=(50*mm))
 
 
 # Configuration du style du tableau
@@ -56,11 +56,24 @@ style = TableStyle([
     ('FONTSIZE', (0,0), (-1,0), 14),
     ('BOTTOMPADDING', (0,0), (-1,0), 12),
     ('BACKGROUND',(0,1),(-1,-1),colors.beige),
-    ('GRID',(0,0),(-1,-1),1,colors.black)
+    ('GRID',(0,0),(-1,-1),1,colors.black),
+    
 ])
-
+style1 = TableStyle([
+    ('GRID',(0,0),(-1,-1),1,colors.black),
+    ('VALIGN',(0,0),(-1,-1),'TOP')
+    
+])
 # Appliquer le style au tableau
 table.setStyle(style)
+table1.setStyle(style1)
 
+# En-tête
+h1 = PS(
+    name = 'Heading1',
+    fontSize = 14,
+    leading = 16)
+Titre = Paragraph('Titre Test',h1)
 # Ajouter le tableau au document PDF
-pdf.multiBuild([table,table1])
+pdf.multiBuild([Titre,table,table1])
+

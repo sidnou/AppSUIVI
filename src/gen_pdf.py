@@ -13,6 +13,7 @@ class GenPdf():
         print(data)
         self.nom_fichier = nom_fichier
         self.titre = titre
+        # Tableau des Numéros de suivis 
         self.table = Table(self.data, colWidths=[80*mm, 80*mm]) # dimension des cellule du tableau
         self.style = TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
@@ -25,6 +26,8 @@ class GenPdf():
             ('GRID', (0, 0), (-1, -1), 1, colors.black)
         ])
         self.table.setStyle(self.style)
+        # Tableau signature et non prénom
+        
         
     # Création du fichier PDF
     def generateur_pdf(self):
