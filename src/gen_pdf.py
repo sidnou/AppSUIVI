@@ -2,14 +2,19 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.units import mm
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from datetime import date
+from reportlab.pdfgen import canvas
+
+AUJOURD_HUI = date.today().strftime("%d/%m/%Y")
 
 # Classe Création d'un fichier PDF
-
-
 class GenPdf():
 
     def __init__(self, data: set, nom_fichier: str, titre):
         self.data = data
+        self.data1 = [["",
+              f"Date: {AUJOURD_HUI}\nNom et Prénom:\nSignature:\n\n\n"
+              ]]
         print(data)
         self.nom_fichier = nom_fichier
         self.titre = titre
@@ -27,12 +32,24 @@ class GenPdf():
         ])
         self.table.setStyle(self.style)
         # Tableau signature et non prénom
-        
-        
+        self.table1 = Table(self.data1,colWidths=[80*mm,80*mm],spaceBefore=(15*mm),rowHeights=(50*mm))
+        self.style1 = TableStyle([('GRID',(0,0),(-1,-1),1,colors.black),('VALIGN',(0,0),(-1,-1),'TOP')])
+        self.table1.setStyle(self.style1)
+    
+    # En-tëte
+    def header(self):
+     c = canvas.Canvas(self.nom_fichier)
+     c.saveState()
+     c.setFont('Courier-Bold', 14)
+     c.drawCentredString(letter[0]/2.0,letter[1]-15,self.titre)
+     c.restoreState()
+    
+    
     # Création du fichier PDF
     def generateur_pdf(self):
         self.pdf = SimpleDocTemplate(self.nom_fichier, pagesize=letter)
-        self.pdf.multiBuild([self.table])
+        # self.pdf.build(self.header())
+        self.pdf.multiBuild([self.table,self.table1])
 
 
 

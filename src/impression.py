@@ -32,6 +32,7 @@ from reportlab.lib import colors
 from  reportlab.lib.styles import ParagraphStyle as PS
 from reportlab.lib.units import mm
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle,Paragraph
+from reportlab.pdfgen import canvas
 
 # Données pour remplir le tableau
 data = []
@@ -69,11 +70,20 @@ table.setStyle(style)
 table1.setStyle(style1)
 
 # En-tête
-h1 = PS(
-    name = 'Heading1',
-    fontSize = 14,
-    leading = 16)
-Titre = Paragraph('Titre Test',h1)
+# h1 = PS(
+#     name = 'Heading1',
+#     fontSize = 14,
+#     leading = 16)
+# Titre = Paragraph('Titre Test',h1)
+def header():
+     c = canvas.Canvas()
+     c.saveState()
+     c.setFont('Helvetica-bold', 14)
+     c.drawCentredString(letter[0]/2.0,letter[1]-15,'Titre Test')
+     c.restoreState()
+     
+
 # Ajouter le tableau au document PDF
-pdf.multiBuild([Titre,table,table1])
+pdf.
+pdf.multiBuild([table,table1])
 
