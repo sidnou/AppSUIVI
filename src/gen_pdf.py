@@ -10,12 +10,15 @@ AUJOURD_HUI = date.today().strftime("%d/%m/%Y")
 # Classe Création d'un fichier PDF
 class GenPdf():
 
-    def __init__(self, data: set, nom_fichier: str, titre):
+    def __init__(self, data: set, nom_fichier: str, titre,nc):
+        # Nombre de Numéro suivi
+        self.nombreNumeroSuivi = nc 
+        # Données 
         self.data = data
-        self.data1 = [["",
+        self.data1 = [[f"Nombre de Colis: {nc}",
               f"Date: {AUJOURD_HUI}\nNom et Prénom:\nSignature:\n\n\n"
               ]]
-        print(data)
+        
         self.nom_fichier = nom_fichier
         self.titre = titre
         # Tableau des Numéros de suivis 
@@ -35,7 +38,6 @@ class GenPdf():
         self.table1 = Table(self.data1,colWidths=[80*mm,80*mm],spaceBefore=(15*mm),rowHeights=(50*mm))
         self.style1 = TableStyle([('GRID',(0,0),(-1,-1),1,colors.black),('VALIGN',(0,0),(-1,-1),'TOP')])
         self.table1.setStyle(self.style1)
-    
     # En-tëte
     def header(self):
      c = canvas.Canvas(self.nom_fichier)
@@ -49,6 +51,7 @@ class GenPdf():
     def generateur_pdf(self):
         self.pdf = SimpleDocTemplate(self.nom_fichier, pagesize=letter)
         # self.pdf.build(self.header())
+        print(type(self.table))
         self.pdf.multiBuild([self.table,self.table1])
 
 
@@ -58,6 +61,6 @@ if __name__ =='__main__':
         ['Numéro de Suivi Chronopost','Numéro de Suivi Chronopost'],
         ['Test 1','Test2']
             ]
-    testPdf = GenPdf(data,"test-exemple-pdf.pdf","test")
+    testPdf = GenPdf(data,"test-exemple-pdf.pdf","test",'15')
     testPdf.generateur_pdf()
       
