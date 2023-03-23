@@ -5,3 +5,6 @@ suivi-Chronopost.db
 .vscode/settings.json
 __pycache__
 *.pdf
+*.spec
+/build
+*.exe

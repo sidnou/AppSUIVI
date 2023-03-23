@@ -8,34 +8,8 @@ from datetime import date
 
 DATE_FORMAT_ISO = date.today().isoformat()
 VERSION = "0.0.1b"
-NOM_FICHIER_PDF = f"Depart_Colis_Chronopost.pdf-{DATE_FORMAT_ISO}"
-#####################################################################
-# ## Exemple
-# # Code
-# fenetre = Tk()
-# fenetre.title("Interface Utilisateur")
-# fenetre.geometry("600x600") # Dimension de la fenêtre
-# # Label
-# label = Label(fenetre, text="Bonjour le Monde")
-# label.pack()
-# # Canvas
-# canvas = Canvas(fenetre,width=400,height=400,background='white')
-# canvas.pack(side=TOP)
+NOM_FICHIER_PDF = f"Depart_Colis_Chronopost-{DATE_FORMAT_ISO}.pdf"
 
-# # Bouton
-# bouton = Button(fenetre,text="Impression")
-# bouton.pack()
-
-# # Entrée
-# valeur = StringVar() # Déclaration de la valeur
-# valeur.set("Valeur")
-# entree = Entry(fenetre,textvariable=valeur,width=30)
-# entree.pack()
-
-# fenetre.mainloop()
-
-######################################################################
-######################################################################
 # fenêtre
 fenetre = Tk()
 fenetre.title("Suivi Envoi Chronopost")  # Titre de la fenêtre
@@ -148,7 +122,7 @@ entree40 = Entry(cadre, textvariable=nSuivi[39], font=MON_FONT_2)
 entree40.grid(row=19, column=1, sticky="W")
 
 label = Label(cadre2, text='Nombre de Colis:',
-              background="#0072B5", font=MON_FONT_1)
+              background="#0072B5", font=MON_FONT)
 nColis = StringVar()
 nColis.set("0")
 label1 = Label(cadre2, textvariable=nColis, font=MON_FONT_1)
