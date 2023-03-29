@@ -13,10 +13,10 @@ NOM_FICHIER_PDF = f"Depart_Colis_Chronopost-{DATE_FORMAT_ISO}.pdf"
 # fenêtre
 fenetre = Tk()
 fenetre.title("Suivi Envoi Chronopost")  # Titre de la fenêtre
-fenetre.geometry("800x600")  # Dimension de la fenêtre
+fenetre.geometry("1024x700")  # Dimension de la fenêtre
 # fenetre.iconbitmap() # Icone de l'application
 fenetre.minsize(800, 600)
-fenetre.maxsize(800, 600)
+fenetre.maxsize(1024, 700)
 fenetre.config(background="#0072B5")
 # Police  ou Font
 MON_FONT = font.Font(family='Couriel', size=15,
