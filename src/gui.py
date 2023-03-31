@@ -6,9 +6,7 @@ import win32api
 import os
 from datetime import date
 
-DATE_FORMAT_ISO = date.today().isoformat()
 VERSION = "0.0.1b"
-NOM_FICHIER_PDF = f"Depart_Colis_Chronopost-{DATE_FORMAT_ISO}.pdf"
 
 # fenêtre
 fenetre = Tk()
@@ -168,6 +166,8 @@ def verif_doublon():
 
 # Impression de la feuille de suivi Chronopost
 def impression():
+    dateFormatIso = date.today().isoformat()
+    nomFichierPDF = f"Depart_Colis_Chronopost-{dateFormatIso}.pdf"
     nc = sum(nSuivi[saisi].get() != "" for saisi in range(NOMBRE_SAISI))
     data = [
         ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost'],
@@ -193,13 +193,13 @@ def impression():
         [nSuivi[19].get(), nSuivi[39].get()]
     ]
     print(len(data))
-    pdf = GenPdf(data, NOM_FICHIER_PDF, "Suivi Colis Chronopost", nc)
+    pdf = GenPdf(data, nomFichierPDF, "Suivi Colis Chronopost", nc)
     pdf.generateur_pdf()
 
     # Impression du fichier PDF
     # Imprimez le PDF avec win32print
     printer_name = win32print.GetDefaultPrinter()
-    filepath = os.path.abspath(NOM_FICHIER_PDF)
+    filepath = os.path.abspath(nomFichierPDF)
     win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
     print("Document imprimé!")
    
