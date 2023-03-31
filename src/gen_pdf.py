@@ -36,7 +36,7 @@ class GenPdf():
         self.table.setStyle(self.style)
         # Tableau signature et non prénom
         self.table1 = Table(self.data1,colWidths=[80*mm,80*mm],spaceBefore=(15*mm),rowHeights=(50*mm))
-        self.style1 = TableStyle([('GRID',(0,0),(-1,-1),1,colors.black),('VALIGN',(0,0),(-1,-1),'TOP')])
+        self.style1 = TableStyle([('GRID',(0,0),(-1,-1),1,colors.black),('VALIGN',(0,0),(-1,-1),'TOP'),('FONTSIZE', (0, 0), (-1, 0), 12)])
         self.table1.setStyle(self.style1)
     # En-tëte
     def header(self):
