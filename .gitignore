@@ -8,3 +8,5 @@ __pycache__
 *.spec
 /build
 *.exe
+src/testf.py
+src/testColonneLigne.py

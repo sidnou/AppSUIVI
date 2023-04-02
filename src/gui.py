@@ -6,26 +6,26 @@ import win32api
 import os
 from datetime import date
 
-VERSION = "0.0.1b"
-
+VERSION = "0.0.2b"
+BACKGROUND_GENERAL = "#0072B5"
 # fenêtre
 fenetre = Tk()
 fenetre.title("Suivi Envoi Chronopost")  # Titre de la fenêtre
-fenetre.geometry("1024x700")  # Dimension de la fenêtre
+fenetre.geometry("1024x768")  # Dimension de la fenêtre
 # fenetre.iconbitmap() # Icone de l'application
-fenetre.minsize(800, 600)
-fenetre.maxsize(1024, 700)
-fenetre.config(background="#0072B5")
+fenetre.minsize(1024, 768)
+fenetre.maxsize(1024, 768)
+fenetre.config(background=BACKGROUND_GENERAL)
 # Police  ou Font
 MON_FONT = font.Font(family='Couriel', size=15,
                      weight="bold")  # Police du Text
 MON_FONT_1 = font.Font(family='arial', size=12,
                        weight="bold")  # Police du Text
-MON_FONT_2 = font.Font(family='arial', size=10,
+MON_FONT_2 = font.Font(family='arial', size=12,
                        weight="bold")  # Police du Text
 # Version de l'application
-labelVersion = Label(fenetre, text=VERSION, background="#0072B5")
-labelVersion.place(x=760, y=0)
+labelVersion = Label(fenetre, text=VERSION, background=BACKGROUND_GENERAL)
+labelVersion.place(x=980)
 # Cadre
 cadre = Frame(fenetre, width=100, height=700, relief="solid", bd=1)
 cadre.pack(expand=YES)
@@ -37,6 +37,9 @@ cadre3.pack()
 NOMBRE_SAISI = 40
 nSuivi = {saisi: StringVar() for saisi in range(NOMBRE_SAISI)}
 
+NOMBRE_LIGNE = 20
+NOMBRE_COLONNE = 3
+entreeSaisi = []
 
 entree1 = Entry(cadre, textvariable=nSuivi[0], font=MON_FONT_2)
 entree1.grid(row=0, column=0, sticky="W")
@@ -155,19 +158,20 @@ def verif_doublon():
         if entreeSaisi.count(el) > 1:
             doublon.add(el)
 
-    print(doublon)  # affichage des valeurs en doublons
-    print(type(doublon))
+    # print(doublon)  # affichage des valeurs en doublons
+    # print(type(doublon))
     # if doublon == set():
     if not doublon:
         valeurDoublon.set("0")
     else:
+        doublon= tuple(doublon)
         valeurDoublon.set(doublon)
 
 
 # Impression de la feuille de suivi Chronopost
 def impression():
     dateFormatIso = date.today().isoformat()
-    nomFichierPDF = f"Depart_Colis_Chronopost-{dateFormatIso}.pdf"
+    nomFichierPdf = f"Depart_Colis_Chronopost-{dateFormatIso}.pdf"
     nc = sum(nSuivi[saisi].get() != "" for saisi in range(NOMBRE_SAISI))
     data = [
         ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost'],
@@ -192,16 +196,16 @@ def impression():
         [nSuivi[18].get(), nSuivi[38].get()],
         [nSuivi[19].get(), nSuivi[39].get()]
     ]
-    print(len(data))
-    pdf = GenPdf(data, nomFichierPDF, "Suivi Colis Chronopost", nc)
+   
+    pdf = GenPdf(data, nomFichierPdf, "Suivi Colis Chronopost", nc)
     pdf.generateur_pdf()
 
-    # Impression du fichier PDF
-    # Imprimez le PDF avec win32print
-    printer_name = win32print.GetDefaultPrinter()
-    filepath = os.path.abspath(nomFichierPDF)
-    win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
-    print("Document imprimé!")
+    # # Impression du fichier PDF
+    # # Imprimez le PDF avec win32print
+    # printer_name = win32print.GetDefaultPrinter()
+    # filepath = os.path.abspath(nomFichierPdf)
+    # win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
+    # print("Document imprimé!")
    
 
 def effacerValeur():

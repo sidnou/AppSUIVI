@@ -51,7 +51,6 @@ class GenPdf():
     def generateur_pdf(self):
         self.pdf = SimpleDocTemplate(self.nom_fichier, pagesize=letter)
         # self.pdf.build(self.header())
-        print(type(self.table))
         self.pdf.multiBuild([self.table,self.table1])
 
 
