@@ -12,7 +12,7 @@ BACKGROUND_GENERAL = "#0072B5"
 fenetre = Tk()
 fenetre.title("Suivi Envoi Chronopost")  # Titre de la fenêtre
 fenetre.geometry("1024x768")  # Dimension de la fenêtre
-# fenetre.iconbitmap() # Icone de l'application
+# fenetre.iconbitmap("src\chronopost.ico") # Icone de l'application
 fenetre.minsize(1024, 768)
 fenetre.maxsize(1024, 768)
 fenetre.config(background=BACKGROUND_GENERAL)
@@ -196,17 +196,17 @@ def impression():
         [nSuivi[18].get(), nSuivi[38].get()],
         [nSuivi[19].get(), nSuivi[39].get()]
     ]
-   
+
     pdf = GenPdf(data, nomFichierPdf, "Suivi Colis Chronopost", nc)
     pdf.generateur_pdf()
 
     # # Impression du fichier PDF
     # # Imprimez le PDF avec win32print
-    # printer_name = win32print.GetDefaultPrinter()
-    # filepath = os.path.abspath(nomFichierPdf)
-    # win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
-    # print("Document imprimé!")
-   
+    printer_name = win32print.GetDefaultPrinter()
+    filepath = os.path.abspath(nomFichierPdf)
+    win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
+    print("Document imprimé!")
+
 
 def effacerValeur():
     for n in range(NOMBRE_SAISI):
