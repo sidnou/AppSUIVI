@@ -143,35 +143,25 @@ def verif_doublon():
     # Compte le colis saisi
     nc = sum(nSuivi[saisi].get() != "" for saisi in range(NOMBRE_SAISI))
     nColis.set(nc)
-    # Verification des doublons
-    doublon = set()
-    entreeSaisi = []
+    entree_saisi = []
     for n in range(NOMBRE_SAISI):
         # print(nc)
         # print(n)
         # print(nSuivi[n].get())
         if nSuivi[n].get() != "":
-            entreeSaisi.append(nSuivi[n].get())
-            print(entreeSaisi)
-    # print(entreeSaisi)
-    for el in entreeSaisi:
-        if entreeSaisi.count(el) > 1:
-            doublon.add(el)
-
-    # print(doublon)  # affichage des valeurs en doublons
-    # print(type(doublon))
-    # if doublon == set():
-    if not doublon:
-        valeurDoublon.set("0")
-    else:
+            entree_saisi.append(nSuivi[n].get())
+            print(entree_saisi)
+    if doublon := {el for el in entree_saisi if entree_saisi.count(el) > 1}:
         doublon= tuple(doublon)
         valeurDoublon.set(doublon)
+    else:
+        valeurDoublon.set("0")
 
 
 # Impression de la feuille de suivi Chronopost
 def impression():
-    dateFormatIso = date.today().isoformat()
-    nomFichierPdf = f"Depart_Colis_Chronopost-{dateFormatIso}.pdf"
+    date_format_iso = date.today().isoformat()
+    nom_fichier_pdf = f"Depart_Colis_Chronopost-{date_format_iso}.pdf"
     nc = sum(nSuivi[saisi].get() != "" for saisi in range(NOMBRE_SAISI))
     data = [
         ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost'],
@@ -197,13 +187,13 @@ def impression():
         [nSuivi[19].get(), nSuivi[39].get()]
     ]
 
-    pdf = GenPdf(data, nomFichierPdf, "Suivi Colis Chronopost", nc)
+    pdf = GenPdf(data, nom_fichier_pdf, "Suivi Colis Chronopost", nc)
     pdf.generateur_pdf()
 
     # # Impression du fichier PDF
     # # Imprimez le PDF avec win32print
     printer_name = win32print.GetDefaultPrinter()
-    filepath = os.path.abspath(nomFichierPdf)
+    filepath = os.path.abspath(nom_fichier_pdf)
     win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
     print("Document imprimé!")
 
