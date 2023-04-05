@@ -136,6 +136,8 @@ label2 = Label(cadre3, text='Valeurs en doublon',
 label2.pack(side=LEFT)
 label3 = Label(cadre3, textvariable=valeurDoublon, font=MON_FONT_1)
 label3.pack(side=RIGHT)
+
+
 # Vérification des numèro suivi saisi pas de doublon
 
 
@@ -152,7 +154,7 @@ def verif_doublon():
             entree_saisi.append(nSuivi[n].get())
             print(entree_saisi)
     if doublon := {el for el in entree_saisi if entree_saisi.count(el) > 1}:
-        doublon= tuple(doublon)
+        doublon = tuple(doublon)
         valeurDoublon.set(doublon)
     else:
         valeurDoublon.set("0")
@@ -163,7 +165,7 @@ def impression():
     date_format_iso = date.today().isoformat()
     nom_fichier_pdf = f"Depart_Colis_Chronopost-{date_format_iso}.pdf"
     nc = sum(nSuivi[saisi].get() != "" for saisi in range(NOMBRE_SAISI))
-    data = [
+    donnees = [
         ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost'],
         [nSuivi[0].get(), nSuivi[20].get()],
         [nSuivi[1].get(), nSuivi[21].get()],
@@ -187,7 +189,7 @@ def impression():
         [nSuivi[19].get(), nSuivi[39].get()]
     ]
 
-    pdf = GenPdf(data, nom_fichier_pdf, "Suivi Colis Chronopost", nc)
+    pdf = GenPdf(donnees, nom_fichier_pdf, "Suivi Colis Chronopost", nc)
     pdf.generateur_pdf()
 
     # # Impression du fichier PDF
@@ -196,9 +198,10 @@ def impression():
     filepath = os.path.abspath(nom_fichier_pdf)
     win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
     print("Document imprimé!")
+    return 0
 
 
-def effacerValeur():
+def effacer_valeur():
     for n in range(NOMBRE_SAISI):
         nSuivi[n].set("")
 
@@ -212,7 +215,7 @@ bouton2 = Button(fenetre, text='Impression', command=impression,
                  bg='#DFA80B', fg="white", font=MON_FONT, width=20)
 bouton2.pack()
 # Bouton d'éffacement des valeurs saisis
-bouton3 = Button(fenetre, text='Efface', command=effacerValeur,
+bouton3 = Button(fenetre, text='Efface', command=effacer_valeur,
                  bg='red', fg='white', font=MON_FONT, width=20)
 bouton3.pack()
 
