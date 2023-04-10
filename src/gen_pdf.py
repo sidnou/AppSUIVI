@@ -9,7 +9,7 @@ AUJOURD_HUI = date.today().strftime("%d/%m/%Y")
 
 
 # Classe Création d'un fichier PDF
-class GenPdf():
+class GenPdf:
 
     def __init__(self, data: set, nom_fichier: str, titre, nc):
         # Nombre de Numéro suivi
@@ -52,7 +52,6 @@ class GenPdf():
     # Création du fichier PDF
     def generateur_pdf(self):
         self.pdf = SimpleDocTemplate(self.nom_fichier, pagesize=letter)
-        # self.pdf.build(self.header())
         self.pdf.multiBuild([self.table, self.table1])
 
 

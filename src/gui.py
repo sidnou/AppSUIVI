@@ -23,19 +23,90 @@ MON_FONT_1 = font.Font(family='arial', size=12,
                        weight="bold")  # Police du Text
 MON_FONT_2 = font.Font(family='arial', size=12,
                        weight="bold")  # Police du Text
+# Police et coleur de font
+FONT_TOP_WIND = font.Font(family="arial", size=20, weight="bold", slant="italic")
+BG_TOP_WIND = "red"
+FONT_COLOR = "white"
+
 # Version de l'application
 labelVersion = Label(fenetre, text=VERSION, background=BACKGROUND_GENERAL)
 labelVersion.place(x=980)
 # Cadre
 cadre = Frame(fenetre, width=100, height=700, relief="solid", bd=1)
 cadre.pack(expand=YES)
-cadre2 = Frame(fenetre, width=200, height=25)
+cadre2 = Frame(fenetre, width=200, height=25, background=BACKGROUND_GENERAL)
 cadre2.pack()
-cadre3 = Frame(fenetre, width=200, height=25)
-cadre3.pack()
+
+
+# def verif_doublon():
+#     # Compte le colis saisi
+#     nColis.set(str(sum(nSuivi[s].get() != "" for s in range(NOMBRE_SAISI))))
+#     entree_saisi = []
+#     for n in range(NOMBRE_SAISI):
+#         if nSuivi[n].get() != "":
+#             entree_saisi.append(nSuivi[n].get())
+#             print(type(entree_saisi))
+#     if doublon := {el for el in entree_saisi if entree_saisi.count(el) > 1}:
+#         valeurDoublon.set(str(tuple(doublon)))
+#     else:
+#         valeurDoublon.set("0")
+
+
+# validation des saisis
+def valide(*args):
+    print(args)
+    nColis.set(str(sum(nSuivi[sa].get() != "" for sa in range(NOMBRE_SAISI))))
+    entree_saisi = []  # Les valeurs saisi
+    # Boucle des valeurs saisi
+    for n in range(NOMBRE_SAISI):
+        if nSuivi[n].get() != "":  # Ignore les entrées vide ou ""
+            entree_saisi.append(nSuivi[n].get())
+            if len(nSuivi[n].get()) > 13:  # Affiche message d'erreur si la longeur ne correspond pas
+                top_fenetre = Toplevel(fenetre)
+                top_fenetre.config(background=BG_TOP_WIND)
+                Label(top_fenetre, text="!!! Entrée N° suivi de 13 caractères !!!", background=BG_TOP_WIND,
+                      font=FONT_TOP_WIND, fg=FONT_COLOR).pack(padx=5, pady=5)
+                Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
+
+
+
+    # Vérification des doublon
+    for ed in entree_saisi:  # Boucle des entrées saisi
+        if entree_saisi.count(ed) > 1:  # vérification qu'il n'y a pas plus du 1 valeur saisi
+            top_fenetre = Toplevel(fenetre)
+            top_fenetre.config(background=BG_TOP_WIND)
+            Label(top_fenetre, text="!!! Ce numéro de suivi est déja Saisi !!!", background=BG_TOP_WIND,
+                  font=FONT_TOP_WIND, fg=FONT_COLOR).pack(padx=5, pady=5)
+            Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
+            break
+
+    # # Exemple de *args : XS124909456FR longeur 13
+    # for s in range(NOMBRE_SAISI):
+    #     print(nSuivi[s].get())
+    #     print(len(nSuivi[s].get()))
+    #     if len(nSuivi[s].get()) == 13:
+    #         continue
+    #     elif len(nSuivi[s].get()) > 13:
+    #         top_fenetre1 = Toplevel(fenetre)
+    #         Label(top_fenetre1, text="Entre un suivi de 13 caractères").pack(padx=5, pady=5)
+    #         Button(top_fenetre1, text='OK', command=top_fenetre1.destroy).pack(padx=5, pady=5)
+    #         return False
+    #     elif len(nSuivi[s].get()) == 0:
+    #         break
+    # else:
+    #     top_fenetre = Toplevel(fenetre)
+    #     Label(top_fenetre, text="Entrée un suiuvi Valide").pack(padx=5, pady=5)
+    #     Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
+    #     return False
+
+
 # Numero de Suivi
 NOMBRE_SAISI = 40
-nSuivi = {saisi: StringVar() for saisi in range(NOMBRE_SAISI)}
+# nSuivi = {saisi: StringVar() for saisi in range(NOMBRE_SAISI)}
+nSuivi = {}
+for s in range(NOMBRE_SAISI):
+    nSuivi[s] = StringVar()
+    nSuivi[s].trace_variable("w", valide)
 
 NOMBRE_LIGNE = 20
 NOMBRE_COLONNE = 3
@@ -126,45 +197,18 @@ label = Label(cadre2, text='Nombre de Colis:',
               background="#0072B5", font=MON_FONT)
 nColis = StringVar()
 nColis.set("0")
-label1 = Label(cadre2, textvariable=nColis, font=MON_FONT_1)
+label1 = Label(cadre2, textvariable=nColis, font=MON_FONT_1, background=BACKGROUND_GENERAL)
 label.pack(side=LEFT)
 label1.pack(side=RIGHT)
-valeurDoublon = StringVar()
-valeurDoublon.set("0")
-label2 = Label(cadre3, text='Valeurs en doublon',
-               background="#0072B5", font=MON_FONT_1)
-label2.pack(side=LEFT)
-label3 = Label(cadre3, textvariable=valeurDoublon, font=MON_FONT_1)
-label3.pack(side=RIGHT)
-
 
 # Vérification des numèro suivi saisi pas de doublon
-
-
-def verif_doublon():
-    # Compte le colis saisi
-    nc = sum(nSuivi[saisi].get() != "" for saisi in range(NOMBRE_SAISI))
-    nColis.set(nc)
-    entree_saisi = []
-    for n in range(NOMBRE_SAISI):
-        # print(nc)
-        # print(n)
-        # print(nSuivi[n].get())
-        if nSuivi[n].get() != "":
-            entree_saisi.append(nSuivi[n].get())
-            print(entree_saisi)
-    if doublon := {el for el in entree_saisi if entree_saisi.count(el) > 1}:
-        doublon = tuple(doublon)
-        valeurDoublon.set(doublon)
-    else:
-        valeurDoublon.set("0")
 
 
 # Impression de la feuille de suivi Chronopost
 def impression():
     date_format_iso = date.today().isoformat()
     nom_fichier_pdf = f"Depart_Colis_Chronopost-{date_format_iso}.pdf"
-    nc = sum(nSuivi[saisi].get() != "" for saisi in range(NOMBRE_SAISI))
+    nombre_colis = sum(nSuivi[e].get() != "" for e in range(NOMBRE_SAISI))
     donnees = [
         ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost'],
         [nSuivi[0].get(), nSuivi[20].get()],
@@ -189,7 +233,7 @@ def impression():
         [nSuivi[19].get(), nSuivi[39].get()]
     ]
 
-    pdf = GenPdf(donnees, nom_fichier_pdf, "Suivi Colis Chronopost", nc)
+    pdf = GenPdf(donnees, nom_fichier_pdf, "Suivi Colis Chronopost", nombre_colis)
     pdf.generateur_pdf()
 
     # # Impression du fichier PDF
@@ -206,10 +250,6 @@ def effacer_valeur():
         nSuivi[n].set("")
 
 
-# Bouton de vérification des doublons
-bouton1 = Button(fenetre, text='Vérification', command=verif_doublon,
-                 bg="#12D292", fg="white", font=MON_FONT, width=20)
-bouton1.pack()
 # Bouton d'Impression
 bouton2 = Button(fenetre, text='Impression', command=impression,
                  bg='#DFA80B', fg="white", font=MON_FONT, width=20)
