@@ -1,7 +1,8 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.units import mm
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from datetime import date
 from reportlab.pdfgen import canvas
 
@@ -19,7 +20,7 @@ class GenPdf:
         self.data1 = [[f"Nombre de Colis: {nc}",
                        f"Date: {AUJOURD_HUI}\nNom et Prénom:\nSignature:\n\n\n"
                        ]]
-
+        self.data2 = [['RECEPTION DES COLIS PAR CHRONOPOST ']]
         self.nom_fichier = nom_fichier
         self.titre = titre
         # Tableau des Numéros de suivis 
@@ -41,6 +42,29 @@ class GenPdf:
                                   ('FONTSIZE', (0, 0), (-1, 0), 12)])
         self.table1.setStyle(self.style1)
 
+        # self.table2 = Table(self.data2, colWidths=[80 * mm, 80 * mm], rowHeights=(25 * mm))
+        # self.style2 = TableStyle([('ALIGN', (0,0 ), (0, 0), 'CENTER'),
+        #                           ('FONTSIZE', (0, 0), (0, 0), 20)])
+        # self.table2.setStyle(self.style2)
+
+        # # création du style pour l'en-tête
+        # styles = getSampleStyleSheet()
+        # styleN = styles["Normal"]
+        # styleH = styles["Heading1"]
+        # styleH.alignment = 1
+        #
+        # # création de l'en-tête
+        # header = Paragraph("Titre de l'en-tête", styleH)
+        # header_table = Table([[header]])
+        # header_table.setStyle(TableStyle([
+        #     ("BACKGROUND", (0, 0), (-1, -1), colors.lightgrey),
+        #     ("TEXTCOLOR", (0, 0), (-1, -1), colors.black),
+        #     ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        #     ("FONTNAME", (0, 0), (-1, -1), "Helvetica-Bold"),
+        #     ("FONTSIZE", (0, 0), (-1, -1), 14),
+        #     ("BOTTOMPADDING", (0, 0), (-1, -1), 20),
+        # ]))
+
     # En-tëte
     def header(self):
         c = canvas.Canvas(self.nom_fichier)
@@ -52,7 +76,8 @@ class GenPdf:
     # Création du fichier PDF
     def generateur_pdf(self):
         self.pdf = SimpleDocTemplate(self.nom_fichier, pagesize=letter)
-        self.pdf.multiBuild([self.table, self.table1])
+        self.pdf.build([self.table2, self.table, self.table1])
+        # self.pdf.multiBuild([self.table2, self.table, self.table1])
 
 
 if __name__ == '__main__':
