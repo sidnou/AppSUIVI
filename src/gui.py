@@ -8,6 +8,9 @@ from datetime import date
 
 VERSION = "0.0.2b"
 BACKGROUND_GENERAL = "#0072B5"
+# Numero de Suivi
+NOMBRE_SAISI = 40
+
 # fenêtre
 fenetre = Tk()
 fenetre.title("Suivi Envoi Chronopost")  # Titre de la fenêtre
@@ -61,14 +64,14 @@ def valide(*args):
     for n in range(NOMBRE_SAISI):
         if nSuivi[n].get() != "":  # Ignore les entrées vide ou ""
             entree_saisi.append(nSuivi[n].get())
+
+            # # Exemple de *args : XS124909456FR longeur 13
             if len(nSuivi[n].get()) > 13:  # Affiche message d'erreur si la longeur ne correspond pas
                 top_fenetre = Toplevel(fenetre)
                 top_fenetre.config(background=BG_TOP_WIND)
                 Label(top_fenetre, text="!!! Entrée N° suivi de 13 caractères !!!", background=BG_TOP_WIND,
                       font=FONT_TOP_WIND, fg=FONT_COLOR).pack(padx=5, pady=5)
                 Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
-
-
 
     # Vérification des doublon
     for ed in entree_saisi:  # Boucle des entrées saisi
@@ -80,28 +83,7 @@ def valide(*args):
             Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
             break
 
-    # # Exemple de *args : XS124909456FR longeur 13
-    # for s in range(NOMBRE_SAISI):
-    #     print(nSuivi[s].get())
-    #     print(len(nSuivi[s].get()))
-    #     if len(nSuivi[s].get()) == 13:
-    #         continue
-    #     elif len(nSuivi[s].get()) > 13:
-    #         top_fenetre1 = Toplevel(fenetre)
-    #         Label(top_fenetre1, text="Entre un suivi de 13 caractères").pack(padx=5, pady=5)
-    #         Button(top_fenetre1, text='OK', command=top_fenetre1.destroy).pack(padx=5, pady=5)
-    #         return False
-    #     elif len(nSuivi[s].get()) == 0:
-    #         break
-    # else:
-    #     top_fenetre = Toplevel(fenetre)
-    #     Label(top_fenetre, text="Entrée un suiuvi Valide").pack(padx=5, pady=5)
-    #     Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
-    #     return False
 
-
-# Numero de Suivi
-NOMBRE_SAISI = 40
 # nSuivi = {saisi: StringVar() for saisi in range(NOMBRE_SAISI)}
 nSuivi = {}
 for s in range(NOMBRE_SAISI):
@@ -200,6 +182,7 @@ nColis.set("0")
 label1 = Label(cadre2, textvariable=nColis, font=MON_FONT_1, background=BACKGROUND_GENERAL)
 label.pack(side=LEFT)
 label1.pack(side=RIGHT)
+
 
 # Vérification des numèro suivi saisi pas de doublon
 

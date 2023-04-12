@@ -7,7 +7,7 @@ from datetime import date
 from reportlab.pdfgen import canvas
 
 AUJOURD_HUI = date.today().strftime("%d/%m/%Y")
-
+ENTETE_PAGE = "ENVOI CHRONOPOST"
 
 # Classe Création d'un fichier PDF
 class GenPdf:
@@ -47,36 +47,30 @@ class GenPdf:
         #                           ('FONTSIZE', (0, 0), (0, 0), 20)])
         # self.table2.setStyle(self.style2)
 
-        # # création du style pour l'en-tête
-        # styles = getSampleStyleSheet()
-        # styleN = styles["Normal"]
-        # styleH = styles["Heading1"]
-        # styleH.alignment = 1
-        #
-        # # création de l'en-tête
-        # header = Paragraph("Titre de l'en-tête", styleH)
-        # header_table = Table([[header]])
-        # header_table.setStyle(TableStyle([
-        #     ("BACKGROUND", (0, 0), (-1, -1), colors.lightgrey),
-        #     ("TEXTCOLOR", (0, 0), (-1, -1), colors.black),
-        #     ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-        #     ("FONTNAME", (0, 0), (-1, -1), "Helvetica-Bold"),
-        #     ("FONTSIZE", (0, 0), (-1, -1), 14),
-        #     ("BOTTOMPADDING", (0, 0), (-1, -1), 20),
-        # ]))
+        # En-tëte
 
-    # En-tëte
-    def header(self):
-        c = canvas.Canvas(self.nom_fichier)
-        c.saveState()
-        c.setFont('Courier-Bold', 14)
-        c.drawCentredString(letter[0] / 2.0, letter[1] - 15, self.titre)
-        c.restoreState()
+        # création du style pour l'en-tête
+        self.styles = getSampleStyleSheet()
+        self.styleN = self.styles["Normal"]
+        self.styleH = self.styles["Heading1"]
+        self.styleH.alignment = 1
+
+        # création de l'en-tête
+        self.header = Paragraph(ENTETE_PAGE, self.styleH)
+        self.header_table = Table([[self.header]])
+        self.header_table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, -1), colors.lightgrey),
+            ("TEXTCOLOR", (0, 0), (-1, -1), colors.black),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+            ("FONTNAME", (0, 0), (-1, -1), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 14),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 20),
+        ]))
 
     # Création du fichier PDF
     def generateur_pdf(self):
         self.pdf = SimpleDocTemplate(self.nom_fichier, pagesize=letter)
-        self.pdf.build([self.table2, self.table, self.table1])
+        self.pdf.build([self.header_table, self.table, self.table1])
         # self.pdf.multiBuild([self.table2, self.table, self.table1])
 
 
