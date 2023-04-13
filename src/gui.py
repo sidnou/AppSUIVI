@@ -9,7 +9,7 @@ from datetime import date
 VERSION = "0.0.2b"
 BACKGROUND_GENERAL = "#0072B5"
 # Numero de Suivi
-NOMBRE_SAISI = 40
+NOMBRE_SAISI = 60
 
 # fenêtre
 fenetre = Tk()
@@ -41,23 +41,8 @@ cadre2 = Frame(fenetre, width=200, height=25, background=BACKGROUND_GENERAL)
 cadre2.pack()
 
 
-# def verif_doublon():
-#     # Compte le colis saisi
-#     nColis.set(str(sum(nSuivi[s].get() != "" for s in range(NOMBRE_SAISI))))
-#     entree_saisi = []
-#     for n in range(NOMBRE_SAISI):
-#         if nSuivi[n].get() != "":
-#             entree_saisi.append(nSuivi[n].get())
-#             print(type(entree_saisi))
-#     if doublon := {el for el in entree_saisi if entree_saisi.count(el) > 1}:
-#         valeurDoublon.set(str(tuple(doublon)))
-#     else:
-#         valeurDoublon.set("0")
-
-
 # validation des saisis
 def valide(*args):
-    print(args)
     nColis.set(str(sum(nSuivi[sa].get() != "" for sa in range(NOMBRE_SAISI))))
     entree_saisi = []  # Les valeurs saisi
     # Boucle des valeurs saisi
@@ -93,7 +78,7 @@ for s in range(NOMBRE_SAISI):
 NOMBRE_LIGNE = 20
 NOMBRE_COLONNE = 3
 entreeSaisi = []
-
+# 1er Colonnes
 entree1 = Entry(cadre, textvariable=nSuivi[0], font=MON_FONT_2)
 entree1.grid(row=0, column=0, sticky="W")
 entree2 = Entry(cadre, textvariable=nSuivi[1], font=MON_FONT_2)
@@ -134,6 +119,7 @@ entree19 = Entry(cadre, textvariable=nSuivi[18], font=MON_FONT_2)
 entree19.grid(row=18, column=0, sticky="W")
 entree20 = Entry(cadre, textvariable=nSuivi[19], font=MON_FONT_2)
 entree20.grid(row=19, column=0, sticky="W")
+# 2eme Colonnes
 entree21 = Entry(cadre, textvariable=nSuivi[20], font=MON_FONT_2)
 entree21.grid(row=0, column=1, sticky="W")
 entree22 = Entry(cadre, textvariable=nSuivi[21], font=MON_FONT_2)
@@ -174,6 +160,47 @@ entree39 = Entry(cadre, textvariable=nSuivi[38], font=MON_FONT_2)
 entree39.grid(row=18, column=1, sticky="W")
 entree40 = Entry(cadre, textvariable=nSuivi[39], font=MON_FONT_2)
 entree40.grid(row=19, column=1, sticky="W")
+# 3eme colonne
+entree1 = Entry(cadre, textvariable=nSuivi[40], font=MON_FONT_2)
+entree1.grid(row=0, column=2, sticky="W")
+entree2 = Entry(cadre, textvariable=nSuivi[41], font=MON_FONT_2)
+entree2.grid(row=1, column=2, sticky="W")
+entree3 = Entry(cadre, textvariable=nSuivi[42], font=MON_FONT_2)
+entree3.grid(row=2, column=2, sticky="W")
+entree4 = Entry(cadre, textvariable=nSuivi[43], font=MON_FONT_2)
+entree4.grid(row=3, column=2, sticky="W")
+entree5 = Entry(cadre, textvariable=nSuivi[44], font=MON_FONT_2)
+entree5.grid(row=4, column=2, sticky="W")
+entree6 = Entry(cadre, textvariable=nSuivi[45], font=MON_FONT_2)
+entree6.grid(row=5, column=2, sticky="W")
+entree7 = Entry(cadre, textvariable=nSuivi[46], font=MON_FONT_2)
+entree7.grid(row=6, column=2, sticky="W")
+entree8 = Entry(cadre, textvariable=nSuivi[47], font=MON_FONT_2)
+entree8.grid(row=7, column=2, sticky="W")
+entree9 = Entry(cadre, textvariable=nSuivi[48], font=MON_FONT_2)
+entree9.grid(row=8, column=2, sticky="W")
+entree10 = Entry(cadre, textvariable=nSuivi[49], font=MON_FONT_2)
+entree10.grid(row=9, column=2, sticky="W")
+entree11 = Entry(cadre, textvariable=nSuivi[50], font=MON_FONT_2)
+entree11.grid(row=10, column=2, sticky="W")
+entree12 = Entry(cadre, textvariable=nSuivi[51], font=MON_FONT_2)
+entree12.grid(row=11, column=2, sticky="W")
+entree13 = Entry(cadre, textvariable=nSuivi[52], font=MON_FONT_2)
+entree13.grid(row=12, column=2, sticky="W")
+entree14 = Entry(cadre, textvariable=nSuivi[53], font=MON_FONT_2)
+entree14.grid(row=13, column=2, sticky="W")
+entree15 = Entry(cadre, textvariable=nSuivi[54], font=MON_FONT_2)
+entree15.grid(row=14, column=2, sticky="W")
+entree16 = Entry(cadre, textvariable=nSuivi[55], font=MON_FONT_2)
+entree16.grid(row=15, column=2, sticky="W")
+entree17 = Entry(cadre, textvariable=nSuivi[56], font=MON_FONT_2)
+entree17.grid(row=16, column=2, sticky="W")
+entree18 = Entry(cadre, textvariable=nSuivi[57], font=MON_FONT_2)
+entree18.grid(row=17, column=2, sticky="W")
+entree19 = Entry(cadre, textvariable=nSuivi[58], font=MON_FONT_2)
+entree19.grid(row=18, column=2, sticky="W")
+entree20 = Entry(cadre, textvariable=nSuivi[59], font=MON_FONT_2)
+entree20.grid(row=19, column=2, sticky="W")
 
 label = Label(cadre2, text='Nombre de Colis:',
               background="#0072B5", font=MON_FONT)
@@ -193,30 +220,30 @@ def impression():
     nom_fichier_pdf = f"Depart_Colis_Chronopost-{date_format_iso}.pdf"
     nombre_colis = sum(nSuivi[e].get() != "" for e in range(NOMBRE_SAISI))
     donnees = [
-        ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost'],
-        [nSuivi[0].get(), nSuivi[20].get()],
-        [nSuivi[1].get(), nSuivi[21].get()],
-        [nSuivi[2].get(), nSuivi[22].get()],
-        [nSuivi[3].get(), nSuivi[23].get()],
-        [nSuivi[4].get(), nSuivi[24].get()],
-        [nSuivi[5].get(), nSuivi[25].get()],
-        [nSuivi[6].get(), nSuivi[26].get()],
-        [nSuivi[7].get(), nSuivi[27].get()],
-        [nSuivi[8].get(), nSuivi[28].get()],
-        [nSuivi[9].get(), nSuivi[29].get()],
-        [nSuivi[10].get(), nSuivi[30].get()],
-        [nSuivi[11].get(), nSuivi[31].get()],
-        [nSuivi[12].get(), nSuivi[32].get()],
-        [nSuivi[13].get(), nSuivi[33].get()],
-        [nSuivi[14].get(), nSuivi[34].get()],
-        [nSuivi[15].get(), nSuivi[35].get()],
-        [nSuivi[16].get(), nSuivi[36].get()],
-        [nSuivi[17].get(), nSuivi[37].get()],
-        [nSuivi[18].get(), nSuivi[38].get()],
-        [nSuivi[19].get(), nSuivi[39].get()]
+        ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost'],
+        [nSuivi[0].get(), nSuivi[20].get(), nSuivi[40].get()],
+        [nSuivi[1].get(), nSuivi[21].get(), nSuivi[41].get()],
+        [nSuivi[2].get(), nSuivi[22].get(), nSuivi[42].get()],
+        [nSuivi[3].get(), nSuivi[23].get(), nSuivi[43].get()],
+        [nSuivi[4].get(), nSuivi[24].get(), nSuivi[44].get()],
+        [nSuivi[5].get(), nSuivi[25].get(), nSuivi[45].get()],
+        [nSuivi[6].get(), nSuivi[26].get(), nSuivi[46].get()],
+        [nSuivi[7].get(), nSuivi[27].get(), nSuivi[47].get()],
+        [nSuivi[8].get(), nSuivi[28].get(), nSuivi[48].get()],
+        [nSuivi[9].get(), nSuivi[29].get(), nSuivi[49].get()],
+        [nSuivi[10].get(), nSuivi[30].get(), nSuivi[50].get()],
+        [nSuivi[11].get(), nSuivi[31].get(), nSuivi[51].get()],
+        [nSuivi[12].get(), nSuivi[32].get(), nSuivi[52].get()],
+        [nSuivi[13].get(), nSuivi[33].get(), nSuivi[53].get()],
+        [nSuivi[14].get(), nSuivi[34].get(), nSuivi[54].get()],
+        [nSuivi[15].get(), nSuivi[35].get(), nSuivi[55].get()],
+        [nSuivi[16].get(), nSuivi[36].get(), nSuivi[56].get()],
+        [nSuivi[17].get(), nSuivi[37].get(), nSuivi[57].get()],
+        [nSuivi[18].get(), nSuivi[38].get(), nSuivi[58].get()],
+        [nSuivi[19].get(), nSuivi[39].get(), nSuivi[59].get()]
     ]
 
-    pdf = GenPdf(donnees, nom_fichier_pdf, "Suivi Colis Chronopost", nombre_colis)
+    pdf = GenPdf(donnees, nom_fichier_pdf, "RECUPERATION PAR CHRONOPOST", nombre_colis)
     pdf.generateur_pdf()
 
     # # Impression du fichier PDF
@@ -229,8 +256,8 @@ def impression():
 
 
 def effacer_valeur():
-    for n in range(NOMBRE_SAISI):
-        nSuivi[n].set("")
+    for sa in range(NOMBRE_SAISI):
+        nSuivi[sa].set("")
 
 
 # Bouton d'Impression
@@ -240,6 +267,6 @@ bouton2.pack()
 # Bouton d'éffacement des valeurs saisis
 bouton3 = Button(fenetre, text='Efface', command=effacer_valeur,
                  bg='red', fg='white', font=MON_FONT, width=20)
-bouton3.pack()
+bouton3.pack(pady=10)
 
 fenetre.mainloop()

@@ -6,7 +6,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from datetime import date
 
 AUJOURD_HUI = date.today().strftime("%d/%m/%Y")
-ENTETE_PAGE = "ENVOI CHRONOPOST"
+ENTETE_PAGE = "RECUPERATION PAR CHRONOPOST"
 
 
 # Classe Création d'un fichier PDF
@@ -42,7 +42,7 @@ class GenPdf:
         # Tableau signature et non prénom
         self.table1 = Table(self.data1, colWidths=[80 * mm, 80 * mm], spaceBefore=(10 * mm), rowHeights=(50 * mm))
         self.style1 = TableStyle([('GRID', (0, 0), (-1, -1), 1, colors.black), ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                                  ('FONTSIZE', (0, 0), (-1, 0), 12)])
+                                  ('FONTSIZE', (0, 0), (-1, 0), 15)])
         self.table1.setStyle(self.style1)
 
         # En-tëte
@@ -79,7 +79,6 @@ if __name__ == '__main__':
     data = [
         ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost']
     ]
-    for n in range(20):
-        data.append([f'Test {n}', f'Test {n}', f'test {n}'])
+    data.extend([f'Test {n}', f'Test {20+n}', f'test {40+n}'] for n in range(20))
     testPdf = GenPdf(data, "test-exemple-pdf.pdf", "test", '15')
     testPdf.generateur_pdf()
