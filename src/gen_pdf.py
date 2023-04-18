@@ -13,12 +13,14 @@ ENTETE_PAGE = "RECUPERATION PAR CHRONOPOST"
 class GenPdf:
 
     def __init__(self, data: set, nom_fichier: str, titre, nc):
+        # date du jour
+        self.aujourdhui = date.today().strftime("%d/%m/%Y")
         # Nombre de Numéro suivi
         self.nombreNumeroSuivi = nc
         # Données 
         self.data = data
         self.data1 = [[f"Nombre de Colis: {nc}",
-                       f"Date: {AUJOURD_HUI}\nNom et Prénom:\nSignature:\n\n\n"
+                       f"Date: {self.aujourdhui}\nNom et Prénom:\nSignature:\n\n\n"
                        ]]
 
         self.nom_fichier = nom_fichier
