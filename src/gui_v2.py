@@ -24,10 +24,14 @@ fenetre.title("Suivis Envoi Chronopost")  # Titre de la fenêtre
 fenetre.geometry("1024x768+512+200")  # Dimension de la fenêtre
 fenetre.minsize(1024, 768)
 fenetre.maxsize(1920, 1080)
+fenetre.iconbitmap("chronopost.ico")  # Icone de l'application
+# Table
 table = customtkinter.CTkTabview(master=fenetre)
 table.pack(padx=10, pady=10)
 
 table.add("tabl 1")
 table.set("tabl 1")
-
+# Entrée de valeur
+entry = customtkinter.CTkEntry(master=fenetre, placeholder_text="Entrée une valeur")
+entry.pack(padx=40, pady=40)
 fenetre.mainloop()
