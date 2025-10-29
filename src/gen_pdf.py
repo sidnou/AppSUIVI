@@ -12,7 +12,7 @@ ENTETE_PAGE = "RECUPERATION PAR CHRONOPOST"
 # Classe Création d'un fichier PDF
 class GenPdf:
 
-    def __init__(self, data: set, nom_fichier: str, titre, nc):
+    def __init__(self, data: list, nom_fichier: str, titre, nc):
         # date du jour
         self.aujourdhui = date.today().strftime("%d/%m/%Y")
         # Nombre de Numéro suivi

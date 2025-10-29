@@ -1,10 +1,18 @@
-from tkinter import *
+import tkinter as tk
+from tkinter import Toplevel, Label, Button, Entry, Frame, StringVar
 import tkinter.font as font
-from gen_pdf import *
-import win32print
-import win32api
+from gen_pdf import GenPdf
 import os
 from datetime import date
+
+# Imports conditionnels pour Windows
+try:
+    import win32print
+    import win32api
+    WINDOWS_PRINTING = True
+except ImportError:
+    print("Modules win32 non disponibles - impression désactivée")
+    WINDOWS_PRINTING = False
 
 VERSION = "0.0.2b"
 BACKGROUND_GENERAL = "#0072B5"
@@ -12,7 +20,7 @@ BACKGROUND_GENERAL = "#0072B5"
 NOMBRE_SAISI = 60
 
 # fenêtre
-fenetre = Tk()
+fenetre = tk.Tk()
 fenetre.title("Suivi Envoi Chronopost")  # Titre de la fenêtre
 fenetre.geometry("1024x768")  # Dimension de la fenêtre
 # fenetre.iconbitmap("src\chronopost.ico") # Icone de l'application
@@ -36,13 +44,15 @@ labelVersion = Label(fenetre, text=VERSION, background=BACKGROUND_GENERAL)
 labelVersion.place(x=980)
 # Cadre
 cadre = Frame(fenetre, width=100, height=700, relief="solid", bd=1)
-cadre.pack(expand=YES)
+cadre.pack(expand=True)
 cadre2 = Frame(fenetre, width=200, height=25, background=BACKGROUND_GENERAL)
 cadre2.pack()
 
 
 # validation des saisis
 def valide(*args):
+    """Validation des saisies et vérification des doublons"""
+    # Variable args est utilisée par trace_variable de tkinter
     nColis.set(str(sum(nSuivi[sa].get() != "" for sa in range(NOMBRE_SAISI))))
     entree_saisi = []  # Les valeurs saisi
     # Boucle des valeurs saisi
@@ -161,54 +171,54 @@ entree39.grid(row=18, column=1, sticky="W")
 entree40 = Entry(cadre, textvariable=nSuivi[39], font=MON_FONT_2)
 entree40.grid(row=19, column=1, sticky="W")
 # 3eme colonne
-entree1 = Entry(cadre, textvariable=nSuivi[40], font=MON_FONT_2)
-entree1.grid(row=0, column=2, sticky="W")
-entree2 = Entry(cadre, textvariable=nSuivi[41], font=MON_FONT_2)
-entree2.grid(row=1, column=2, sticky="W")
-entree3 = Entry(cadre, textvariable=nSuivi[42], font=MON_FONT_2)
-entree3.grid(row=2, column=2, sticky="W")
-entree4 = Entry(cadre, textvariable=nSuivi[43], font=MON_FONT_2)
-entree4.grid(row=3, column=2, sticky="W")
-entree5 = Entry(cadre, textvariable=nSuivi[44], font=MON_FONT_2)
-entree5.grid(row=4, column=2, sticky="W")
-entree6 = Entry(cadre, textvariable=nSuivi[45], font=MON_FONT_2)
-entree6.grid(row=5, column=2, sticky="W")
-entree7 = Entry(cadre, textvariable=nSuivi[46], font=MON_FONT_2)
-entree7.grid(row=6, column=2, sticky="W")
-entree8 = Entry(cadre, textvariable=nSuivi[47], font=MON_FONT_2)
-entree8.grid(row=7, column=2, sticky="W")
-entree9 = Entry(cadre, textvariable=nSuivi[48], font=MON_FONT_2)
-entree9.grid(row=8, column=2, sticky="W")
-entree10 = Entry(cadre, textvariable=nSuivi[49], font=MON_FONT_2)
-entree10.grid(row=9, column=2, sticky="W")
-entree11 = Entry(cadre, textvariable=nSuivi[50], font=MON_FONT_2)
-entree11.grid(row=10, column=2, sticky="W")
-entree12 = Entry(cadre, textvariable=nSuivi[51], font=MON_FONT_2)
-entree12.grid(row=11, column=2, sticky="W")
-entree13 = Entry(cadre, textvariable=nSuivi[52], font=MON_FONT_2)
-entree13.grid(row=12, column=2, sticky="W")
-entree14 = Entry(cadre, textvariable=nSuivi[53], font=MON_FONT_2)
-entree14.grid(row=13, column=2, sticky="W")
-entree15 = Entry(cadre, textvariable=nSuivi[54], font=MON_FONT_2)
-entree15.grid(row=14, column=2, sticky="W")
-entree16 = Entry(cadre, textvariable=nSuivi[55], font=MON_FONT_2)
-entree16.grid(row=15, column=2, sticky="W")
-entree17 = Entry(cadre, textvariable=nSuivi[56], font=MON_FONT_2)
-entree17.grid(row=16, column=2, sticky="W")
-entree18 = Entry(cadre, textvariable=nSuivi[57], font=MON_FONT_2)
-entree18.grid(row=17, column=2, sticky="W")
-entree19 = Entry(cadre, textvariable=nSuivi[58], font=MON_FONT_2)
-entree19.grid(row=18, column=2, sticky="W")
-entree20 = Entry(cadre, textvariable=nSuivi[59], font=MON_FONT_2)
-entree20.grid(row=19, column=2, sticky="W")
+entree41 = Entry(cadre, textvariable=nSuivi[40], font=MON_FONT_2)
+entree41.grid(row=0, column=2, sticky="W")
+entree42 = Entry(cadre, textvariable=nSuivi[41], font=MON_FONT_2)
+entree42.grid(row=1, column=2, sticky="W")
+entree43 = Entry(cadre, textvariable=nSuivi[42], font=MON_FONT_2)
+entree43.grid(row=2, column=2, sticky="W")
+entree44 = Entry(cadre, textvariable=nSuivi[43], font=MON_FONT_2)
+entree44.grid(row=3, column=2, sticky="W")
+entree45 = Entry(cadre, textvariable=nSuivi[44], font=MON_FONT_2)
+entree45.grid(row=4, column=2, sticky="W")
+entree46 = Entry(cadre, textvariable=nSuivi[45], font=MON_FONT_2)
+entree46.grid(row=5, column=2, sticky="W")
+entree47 = Entry(cadre, textvariable=nSuivi[46], font=MON_FONT_2)
+entree47.grid(row=6, column=2, sticky="W")
+entree48 = Entry(cadre, textvariable=nSuivi[47], font=MON_FONT_2)
+entree48.grid(row=7, column=2, sticky="W")
+entree49 = Entry(cadre, textvariable=nSuivi[48], font=MON_FONT_2)
+entree49.grid(row=8, column=2, sticky="W")
+entree50 = Entry(cadre, textvariable=nSuivi[49], font=MON_FONT_2)
+entree50.grid(row=9, column=2, sticky="W")
+entree51 = Entry(cadre, textvariable=nSuivi[50], font=MON_FONT_2)
+entree51.grid(row=10, column=2, sticky="W")
+entree52 = Entry(cadre, textvariable=nSuivi[51], font=MON_FONT_2)
+entree52.grid(row=11, column=2, sticky="W")
+entree53 = Entry(cadre, textvariable=nSuivi[52], font=MON_FONT_2)
+entree53.grid(row=12, column=2, sticky="W")
+entree54 = Entry(cadre, textvariable=nSuivi[53], font=MON_FONT_2)
+entree54.grid(row=13, column=2, sticky="W")
+entree55 = Entry(cadre, textvariable=nSuivi[54], font=MON_FONT_2)
+entree55.grid(row=14, column=2, sticky="W")
+entree56 = Entry(cadre, textvariable=nSuivi[55], font=MON_FONT_2)
+entree56.grid(row=15, column=2, sticky="W")
+entree57 = Entry(cadre, textvariable=nSuivi[56], font=MON_FONT_2)
+entree57.grid(row=16, column=2, sticky="W")
+entree58 = Entry(cadre, textvariable=nSuivi[57], font=MON_FONT_2)
+entree58.grid(row=17, column=2, sticky="W")
+entree59 = Entry(cadre, textvariable=nSuivi[58], font=MON_FONT_2)
+entree59.grid(row=18, column=2, sticky="W")
+entree60 = Entry(cadre, textvariable=nSuivi[59], font=MON_FONT_2)
+entree60.grid(row=19, column=2, sticky="W")
 
 label = Label(cadre2, text='Nombre de Colis:',
               background="#0072B5", font=MON_FONT)
 nColis = StringVar()
 nColis.set("0")
 label1 = Label(cadre2, textvariable=nColis, font=MON_FONT_1, background=BACKGROUND_GENERAL)
-label.pack(side=LEFT)
-label1.pack(side=RIGHT)
+label.pack(side=tk.LEFT)
+label1.pack(side=tk.RIGHT)
 
 
 # Vérification des numèro suivi saisi pas de doublon
@@ -216,9 +226,20 @@ label1.pack(side=RIGHT)
 
 # Impression de la feuille de suivi Chronopost
 def impression():
+    """Génère et imprime le PDF de suivi"""
     date_format_iso = date.today().isoformat()
     nom_fichier_pdf = f"Depart_Colis_Chronopost-{date_format_iso}.pdf"
     nombre_colis = sum(nSuivi[e].get() != "" for e in range(NOMBRE_SAISI))
+    
+    # Vérification qu'il y a au moins un colis saisi
+    if nombre_colis == 0:
+        top_fenetre = Toplevel(fenetre)
+        top_fenetre.config(background=BG_TOP_WIND)
+        Label(top_fenetre, text="!!! Aucun numéro de suivi saisi !!!", 
+              background=BG_TOP_WIND, font=FONT_TOP_WIND, fg=FONT_COLOR).pack(padx=5, pady=5)
+        Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
+        return
+    
     donnees = [
         ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost'],
         [nSuivi[0].get(), nSuivi[20].get(), nSuivi[40].get()],
@@ -243,19 +264,46 @@ def impression():
         [nSuivi[19].get(), nSuivi[39].get(), nSuivi[59].get()]
     ]
 
-    pdf = GenPdf(donnees, nom_fichier_pdf, "RECUPERATION PAR CHRONOPOST", nombre_colis)
-    pdf.generateur_pdf()
-
-    # # Impression du fichier PDF
-    # # Imprimez le PDF avec win32print
-    printer_name = win32print.GetDefaultPrinter()
-    filepath = os.path.abspath(nom_fichier_pdf)
-    win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
-    print("Document imprimé!")
+    try:
+        pdf = GenPdf(donnees, nom_fichier_pdf, "RECUPERATION PAR CHRONOPOST", nombre_colis)
+        pdf.generateur_pdf()
+        
+        # Impression du fichier PDF seulement si les modules Windows sont disponibles
+        if WINDOWS_PRINTING:
+            try:
+                printer_name = win32print.GetDefaultPrinter()
+                filepath = os.path.abspath(nom_fichier_pdf)
+                win32api.ShellExecute(0, "print", filepath, f'/d:"{printer_name}"', ".", 0)
+                print("Document imprimé!")
+            except Exception as e:
+                print(f"Erreur lors de l'impression: {e}")
+                # Afficher une fenêtre d'information
+                top_fenetre = Toplevel(fenetre)
+                top_fenetre.config(background=BG_TOP_WIND)
+                Label(top_fenetre, text=f"PDF généré: {nom_fichier_pdf}\nImpression échouée: {e}", 
+                      background=BG_TOP_WIND, font=FONT_TOP_WIND, fg=FONT_COLOR).pack(padx=5, pady=5)
+                Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
+        else:
+            # Afficher une fenêtre d'information si pas d'impression
+            top_fenetre = Toplevel(fenetre)
+            top_fenetre.config(background="green")
+            Label(top_fenetre, text=f"PDF généré avec succès: {nom_fichier_pdf}", 
+                  background="green", font=FONT_TOP_WIND, fg="white").pack(padx=5, pady=5)
+            Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
+            
+    except Exception as e:
+        print(f"Erreur lors de la génération du PDF: {e}")
+        top_fenetre = Toplevel(fenetre)
+        top_fenetre.config(background=BG_TOP_WIND)
+        Label(top_fenetre, text=f"Erreur lors de la génération du PDF: {e}", 
+              background=BG_TOP_WIND, font=FONT_TOP_WIND, fg=FONT_COLOR).pack(padx=5, pady=5)
+        Button(top_fenetre, text='OK', command=top_fenetre.destroy).pack(padx=5, pady=5)
+    
     return 0
 
 
 def effacer_valeur():
+    """Efface toutes les valeurs saisies"""
     for sa in range(NOMBRE_SAISI):
         nSuivi[sa].set("")
 
