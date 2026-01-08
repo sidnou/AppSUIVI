@@ -79,7 +79,7 @@ class GenPdf:
 
 if __name__ == '__main__':
     data = [
-        ['Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost', 'Numéro de Suivi Chronopost']
+        ["Numéro de Suivi Démo", "Numéro de Suivi Démo", "Numéro de Suivi Démo"]
     ]
     data.extend([f'Test {n}', f'Test {20+n}', f'test {40+n}'] for n in range(20))
     testPdf = GenPdf(data, "test-exemple-pdf.pdf", "test", '15')
