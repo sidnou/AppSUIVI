@@ -49,9 +49,8 @@ card_nombre_colis.place(x=1700,y=200)
 label_card_colis = Label(card_nombre_colis,text="Nombre de Colis",font=('Couriel', 14,"bold"))
 label_card_colis.place(x=10,y=10)
 nombre_colis = StringVar()
-nombre_colis.set("O")
+nombre_colis.set("0")
 label_nombre_colis = Label(card_nombre_colis ,textvariable=nombre_colis,font=("Couriel", 50,"bold"))
-label_nombre_colis.place(x=60,y=50)
 if int(nombre_colis.get()) >= 10:
     label_nombre_colis.place(x=50,y=50)
 elif int(nombre_colis.get()) >= 100:
