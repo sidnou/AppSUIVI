@@ -22,13 +22,38 @@ Ex%0057470XS410656256248848901 (30 caractères)
 
 '''
 
+def re_scan(valeur):
+    regex = r"XS\d\d\d\d\d\d\d\d\d"
+    # Vérification de la valeur sois une chaine de caractère 
+    if isinstance(valeur,str):
+        test_str = valeur
+    else:
+        return False
+
+    matches = re.finditer(regex, test_str, re.MULTILINE)
+
+    for matchNum, match in enumerate(matches, start=1):
+        
+        print ("Match {matchNum} was found at {start}-{end}: {match}".format(matchNum = matchNum, start = match.start(), end = match.end(), match = match.group()))
+        
+        for groupNum in range(0, len(match.groups())):
+            groupNum = groupNum + 1
+            
+            print ("Group {groupNum} found at {start}-{end}: {group}".format(groupNum = groupNum, start = match.start(groupNum), end = match.end(groupNum), group = match.group(groupNum)))
 
 def scan_verif(data_scan):
     # Vérification de nombre caractère 
     if len(data_scan) == 13:
         return data_scan
     elif len(data_scan) == 30:
+        
+        
         pass
+        
     else:
         pass
 
+
+
+if __name__ == '__main__':
+    print(re_scan("Ex%0057470XS410656256248848901"))

@@ -52,6 +52,12 @@ nombre_colis = StringVar()
 nombre_colis.set("O")
 label_nombre_colis = Label(card_nombre_colis ,textvariable=nombre_colis,font=("Couriel", 50,"bold"))
 label_nombre_colis.place(x=60,y=50)
+if int(nombre_colis.get()) >= 10:
+    label_nombre_colis.place(x=50,y=50)
+elif int(nombre_colis.get()) >= 100:
+    label_nombre_colis.place(x=40,y=50)
+else:
+    label_nombre_colis.place(x=60,y=50)
 
 ##################### Boutons #####################
 # Bouton Impression
