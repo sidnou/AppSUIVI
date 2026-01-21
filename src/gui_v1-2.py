@@ -58,5 +58,7 @@ label_nombre_colis.place(x=60,y=50)
 btn_imp = Button(fenetre_main,text="Impression",bg="#0DE019",fg='white', width=30,border=0.5, font=("Couriel", 15 ,"bold") )
 btn_imp.pack()
 # Bouton Effacement
+btn_eff = Button(fenetre_main,text="Tout Effacer",bg="red", fg='white',width=30,border=0.5,font=("Couriel", 15 ,"bold"))
+btn_eff.pack()
 
 fenetre_main.mainloop()
