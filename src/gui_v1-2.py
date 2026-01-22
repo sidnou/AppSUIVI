@@ -58,6 +58,10 @@ elif int(nombre_colis.get()) >= 100:
 else:
     label_nombre_colis.place(x=60,y=50)
 
+################### Fonction ##############
+def quitter():
+    fenetre_main.destroy()
+
 ##################### Boutons #####################
 # Bouton Impression
 btn_imp = Button(fenetre_main,text="Impression",bg="#0DE019",fg='white', width=30,border=0.5, font=("Couriel", 15 ,"bold") )
@@ -65,5 +69,8 @@ btn_imp.pack()
 # Bouton Effacement
 btn_eff = Button(fenetre_main,text="Tout Effacer",bg="red", fg='white',width=30,border=0.5,font=("Couriel", 15 ,"bold"))
 btn_eff.pack()
+# Bouton Quitter
+btn_quitter = Button(fenetre_main,text="Quitter",bg="red", fg="white",width=10,border=0.5,command=quitter,font=("Couriel", 11 ,"bold") )
+btn_quitter.place(x=1800,y=5)
 
 fenetre_main.mainloop()
