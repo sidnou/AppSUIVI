@@ -39,9 +39,20 @@ fenetre_main.config(background=BACKGROUND_GENERAL)
 label_version = Label(fenetre_main, text=VERSION, background=BACKGROUND_GENERAL,fg="white",font=("Helvetica", 11,"bold"))
 label_version.place(x=1880,y=1060)
 
-# Cadre
+# Cadre des suivis Colis 
 cadre = Frame(fenetre_main, width=1300, height=800, relief="solid", bd=1)
 cadre.pack(expand=True)
+
+numero_suivi = {}
+for n in range(NOMBRE_SAISI):
+    numero_suivi[n] = StringVar()
+    # numero_suivi[s].trace("RW",valide_numero_suivi) ## TODO: Créer une fonction pour validé numéro suivi saisi par l'utilisateur 
+    
+
+entree1 = Entry(cadre, textvariable=numero_suivi[0],font=font.Font(family='arial', size=12,
+                       weight="bold"))
+entree1.grid(row=0,column=0,sticky="W")
+
 
 # Cadre pour nombre de colis scanné 
 card_nombre_colis = Frame(fenetre_main, width=200, height=200.00)
