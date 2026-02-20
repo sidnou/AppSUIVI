@@ -5,7 +5,7 @@ from gen_pdf import GenPdf
 import os
 from datetime import date
 from sys import platform
-
+from verif_scan import scan_verif
 if platform.capitalize() == 'Windows':
     import win32print
     import win32api
@@ -18,6 +18,28 @@ BACKGROUND_GENERAL = "#2285D6"
 DIMENSION_FENETRE_PRINCIPAL =  "1024x768"
 DIM_LISTE = [1920,1024] # Dimension en liste   
 NOMBRE_SAISI = 60
+
+
+
+
+
+########## Fonction ###############
+def correcction_numero_suivi(numero_suivis):
+    print(scan_verif(numero_suivi))
+    
+
+def valide_numero_suivi(*args):
+    print(scan_verif(str(numero_suivi[0].get())))
+    print(str(numero_suivi[0].get()))
+    numero_suivi[0].set(scan_verif((numero_suivi[0].get())))
+
+    # TODO: Verification ligne vide 
+
+    # TODO: Vérifiction de la longueur valeur scanner 
+
+    # TODO: Vérification des doublon 
+    ...
+
 
 
 ################ Fenêtre Principale ###############
@@ -46,7 +68,7 @@ cadre.pack(expand=True)
 numero_suivi = {}
 for n in range(NOMBRE_SAISI):
     numero_suivi[n] = StringVar()
-    # numero_suivi[s].trace("RW",valide_numero_suivi) ## TODO: Créer une fonction pour validé numéro suivi saisi par l'utilisateur 
+    numero_suivi[n].trace("rw",valide_numero_suivi) ## TODO: Créer une fonction pour validé numéro suivi saisi par l'utilisateur 
     
 
 entree1 = Entry(cadre, textvariable=numero_suivi[0],font=font.Font(family='arial', size=12,
