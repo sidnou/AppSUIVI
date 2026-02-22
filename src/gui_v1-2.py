@@ -29,9 +29,12 @@ def correcction_numero_suivi(numero_suivis):
     
 
 def valide_numero_suivi(*args):
-    print(scan_verif(str(numero_suivi[0].get())))
-    print(str(numero_suivi[0].get()))
-    numero_suivi[0].set(scan_verif((numero_suivi[0].get())))
+    # print(scan_verif(str(numero_suivi[0].get())))
+    # print(str(numero_suivi[0].get()))
+    print(len(numero_suivi))
+    # for n in range(len(numero_suivi)):
+    #     print(n)
+    #     numero_suivi[n].set(scan_verif((numero_suivi[n].get())))
 
     # TODO: Verification ligne vide 
 
@@ -39,7 +42,6 @@ def valide_numero_suivi(*args):
 
     # TODO: Vérification des doublon 
     ...
-
 
 
 ################ Fenêtre Principale ###############
@@ -70,10 +72,17 @@ for n in range(NOMBRE_SAISI):
     numero_suivi[n] = StringVar()
     numero_suivi[n].trace("rw",valide_numero_suivi) ## TODO: Créer une fonction pour validé numéro suivi saisi par l'utilisateur 
     
-
+# Colone 1
 entree1 = Entry(cadre, textvariable=numero_suivi[0],font=font.Font(family='arial', size=12,
                        weight="bold"))
 entree1.grid(row=0,column=0,sticky="W")
+# entree1.bind("<Tab>")
+entree2 = Entry(cadre,textvariable=numero_suivi[1],font=font.Font(family='arial', size=12,
+                       weight="bold"))
+entree2.grid(row=1,column=0,sticky="W")
+# Colone 2 
+
+# Colone 3
 
 
 # Cadre pour nombre de colis scanné 
