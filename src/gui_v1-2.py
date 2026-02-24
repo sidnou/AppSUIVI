@@ -24,10 +24,6 @@ NOMBRE_SAISI = 60
 
 
 ########## Fonction ###############
-def correcction_numero_suivi(numero_suivis):
-    print(scan_verif(numero_suivi))
-    
-
 def valide_numero_suivi(*args):
     # print(scan_verif(str(numero_suivi[0].get())))
     # print(str(numero_suivi[0].get()))
@@ -37,6 +33,7 @@ def valide_numero_suivi(*args):
     for n in range(int(nombre_colis.get())):
         print(n)
         numero_suivi[n].set(scan_verif((numero_suivi[n].get())))
+        print(numero_suivi[n].get())
 
     # TODO: Verification ligne vide 
 
@@ -74,16 +71,52 @@ for n in range(NOMBRE_SAISI):
     numero_suivi[n] = StringVar()
     numero_suivi[n].trace("w",valide_numero_suivi) ## TODO: Créer une fonction pour validé numéro suivi saisi par l'utilisateur 
     
+
+# Grille pour les entrées de numéro de suivi
+grille = dict.fromkeys(list(range(15,NOMBRE_SAISI + 1)))
+print(grille)
+
+
 # Colone 1
-entree1 = Entry(cadre, textvariable=numero_suivi[0],font=font.Font(family='arial', size=12,
-                       weight="bold"))
+entree1 = Entry(cadre, textvariable=numero_suivi[0],font=font.Font(family='arial', size=12,weight="bold"))
 entree1.grid(row=0,column=0,sticky="W")
 # entree1.bind("<Tab>")
-entree2 = Entry(cadre,textvariable=numero_suivi[1],font=font.Font(family='arial', size=12,
-                       weight="bold"))
+entree2 = Entry(cadre,textvariable=numero_suivi[1],font=font.Font(family='arial', size=12,weight="bold"))
 entree2.grid(row=1,column=0,sticky="W")
+entree3 = Entry(cadre,textvariable=numero_suivi[2],font=font.Font(family='arial', size=12,weight="bold"))
+entree3.grid(row=2,column=0,sticky="W")
+entree4 = Entry(cadre,textvariable=numero_suivi[3],font=font.Font(family='arial', size=12,weight="bold"))                 
+entree4.grid(row=3,column=0,sticky="W")
+entree5 = Entry(cadre,textvariable=numero_suivi[4],font=font.Font(family='arial', size=12,weight="bold"))
+entree5.grid(row=4,column=0,sticky="W")
+entree6 = Entry(cadre,textvariable=numero_suivi[5],font=font.Font(family='arial', size=12,weight="bold"))
+entree6.grid(row=5,column=0,sticky="W")
+entree7 = Entry(cadre,textvariable=numero_suivi[6],font=font.Font(family='arial', size=12,weight="bold"))
+entree7.grid(row=6,column=0,sticky="W")
+entree8 = Entry(cadre,textvariable=numero_suivi[7],font=font.Font(family='arial', size=12,weight="bold"))
+entree8.grid(row=7,column=0,sticky="W")
+entree9 = Entry(cadre,textvariable=numero_suivi[8],font=font.Font(family='arial', size=12,weight="bold"))
+entree9.grid(row=8,column=0,sticky="W")
+entree10 = Entry(cadre,textvariable=numero_suivi[9],font=font.Font(family='arial', size=12,weight="bold"))
+entree10.grid(row=9,column=0,sticky="W")
+entree11 = Entry(cadre,textvariable=numero_suivi[10],font=font.Font(family='arial', size=12,weight="bold"))
+entree11.grid(row=10,column=0,sticky="W")
+entree12 = Entry(cadre,textvariable=numero_suivi[11],font=font.Font(family='arial', size=12,weight="bold"))
+entree12.grid(row=11,column=0,sticky="W")
+entree13 = Entry(cadre,textvariable=numero_suivi[12],font=font.Font(family='arial', size=12,weight="bold"))
+entree13.grid(row=12,column=0,sticky="W")
+entree14 = Entry(cadre,textvariable=numero_suivi[13],font=font.Font(family='arial', size=12,weight="bold"))
+entree14.grid(row=13,column=0,sticky="W")
+entree15 = Entry(cadre,textvariable=numero_suivi[14],font=font.Font(family='arial', size=12,weight="bold"))
+entree15.grid(row=14,column=0,sticky="W")
 # Colone 2 
+# Boucle des entrée des numero_suivi
 
+for n in range(15,30):
+    
+    grille[n] = Entry(cadre,textvariable=numero_suivi[n],font=font.Font(family='arial', size=12,weight="bold"))
+    grille[n].grid(row=n - 15,column=1,sticky="W")
+   
 # Colone 3
 
 
