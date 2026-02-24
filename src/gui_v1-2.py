@@ -115,7 +115,7 @@ entree15.grid(row=14,column=0,sticky="W")
 for n in range(15,30):
     
     grille[n] = Entry(cadre,textvariable=numero_suivi[n],font=font.Font(family='arial', size=12,weight="bold"))
-    grille[n].grid(row=n - 15,column=1,sticky="W")
+    grille[n].grid(row=n - 15,column=1,sticky="W") # type: ignore
    
 # Colone 3
 
