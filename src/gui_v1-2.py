@@ -31,10 +31,12 @@ def correcction_numero_suivi(numero_suivis):
 def valide_numero_suivi(*args):
     # print(scan_verif(str(numero_suivi[0].get())))
     # print(str(numero_suivi[0].get()))
+    nombre_colis.set(str(sum(numero_suivi[nombre_saisi].get() != "" for nombre_saisi in range(NOMBRE_SAISI))))
+    print(nombre_colis.get())
     print(len(numero_suivi))
-    # for n in range(len(numero_suivi)):
-    #     print(n)
-    #     numero_suivi[n].set(scan_verif((numero_suivi[n].get())))
+    for n in range(int(nombre_colis.get())):
+        print(n)
+        numero_suivi[n].set(scan_verif((numero_suivi[n].get())))
 
     # TODO: Verification ligne vide 
 
@@ -70,7 +72,7 @@ cadre.pack(expand=True)
 numero_suivi = {}
 for n in range(NOMBRE_SAISI):
     numero_suivi[n] = StringVar()
-    numero_suivi[n].trace("rw",valide_numero_suivi) ## TODO: Créer une fonction pour validé numéro suivi saisi par l'utilisateur 
+    numero_suivi[n].trace("w",valide_numero_suivi) ## TODO: Créer une fonction pour validé numéro suivi saisi par l'utilisateur 
     
 # Colone 1
 entree1 = Entry(cadre, textvariable=numero_suivi[0],font=font.Font(family='arial', size=12,
