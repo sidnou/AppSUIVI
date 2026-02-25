@@ -44,7 +44,7 @@ def scan_verif(data_scan):
             return re_scan(data_scan,len(data_scan))
         # si data_scan est inférieur a 13
         else:
-            return False
+            return None
         # si data_scan n'est pas string
     else:
         return False
