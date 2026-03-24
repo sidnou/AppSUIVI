@@ -33,3 +33,25 @@ Troisième étape:
 
 """
 
+import json
+
+
+class ValeurSaisi:
+
+    def __init__(self, valeur_saise, type_saisi='simple'):
+        self.valeur_saisi = valeur_saise
+        self.type_saisi = type_saisi
+
+    def decodage(self):
+        ...
+
+    def verification(self):
+        ...
+
+
+class SauvegardeTemporaire:
+    ...
+
+
+class Sauvegard:
+    ...
