@@ -3,10 +3,13 @@
 
 
 import os
-import tkinter as tk
+from logging import root
+from tkinter import Tk, Entry
 from tkinter import font
 from datetime import date
 
+
+COULEUR_AR_PLAN = "dodgerblue2"
 
 """
 Description:
@@ -28,3 +31,29 @@ Description:
             - Aucun Numèro suivi trouver   
 
 """
+
+#### Fenètre Principal
+fenetre_principal = Tk()
+largeur_ecran = fenetre_principal.winfo_screenwidth()
+longeur_ecran = fenetre_principal.winfo_screenheight()
+fenetre_principal.geometry(f"{largeur_ecran}x{longeur_ecran}")
+fenetre_principal.title('Application Suivi Chronopost')
+fenetre_principal.config(bg=COULEUR_AR_PLAN)
+entree = Entry(fenetre_principal)
+entree.grid(column=2,row=2)
+
+print(largeur_ecran)
+
+
+
+
+
+
+
+
+
+
+
+
+
+fenetre_principal.mainloop()
