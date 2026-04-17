@@ -3,7 +3,6 @@
 
 
 import os
-from logging import root
 from tkinter import Tk, Entry
 from tkinter import font
 from datetime import date
